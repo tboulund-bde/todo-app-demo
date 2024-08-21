@@ -1,3 +1,12 @@
+/**
+ * NOTE to self
+ * Make a module and import the functions from the module
+ * Seperate the functions into different files
+ * Logical grouping of functions - for example, all functions related to adding a todo item can be in one file
+ * 
+ */
+
+
 // 1 Import the CSS file: This ensures that the styles are applied to the HTML elements.
 import './style.css';
 
