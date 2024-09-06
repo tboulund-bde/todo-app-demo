@@ -265,3 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Option 15: JSDOC Comments:
 // Add JSDoc comments to document the functions and interfaces in the code.
 // Link : https://jsdoc.app/
+
+// Optional 16: Handle Errors:
+// Add error handling for user input validation. Show red text or border for invalid input.
+// Display error messages for invalid input.
+
