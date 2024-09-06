@@ -7,12 +7,17 @@
  */
 
 
+/**
+ * REDO it. More streqamlined and better structure - 
+ */
+
+
 // 1 Import the CSS file: This ensures that the styles are applied to the HTML elements.
 import './style.css';
 
 // Step 2: Define the Todo interface
 // Define the Todo interface: This interface defines the structure of a todo item.
-interface Todo {
+export interface Todo {
   id: number;
   text: string;
   completed: boolean;
@@ -20,7 +25,7 @@ interface Todo {
 
 // Step 3: Initialize an empty array to store todos
 // Initialize an empty array: This array will store the list of todos.
-let todos: Todo[] = [];
+export let todos: Todo[] = [];
 
 // Step 4: Get references to the HTML elements
 // Get references to the HTML elements: These references will be used to interact with the DOM
@@ -35,7 +40,7 @@ const todoList = document.getElementById('todo-list') as HTMLUListElement;   // 
 
 // Step 5: Function to add a new todo
 // Function to add a new todo: This function creates a new todo object and adds it to the array.
-const addTodo = (text: string): void => {
+export const addTodo = (text: string): void => {
   const newTodo: Todo = {
     id: Date.now(), // Generate a unique ID based on the current timestamp
     text: text,
@@ -60,9 +65,11 @@ const renderTodos = (): void => { // void because no return - what we are doing 
     li.innerHTML = `
       <span>${todo.text}</span>
       <button>Remove</button>
+         <button id="editBtn">Edit</button>
     `;
     // addRemoveButtonListener is further down in the code. We have onclick in the function instead of template literals. More safe to use addEventListener.
     addRemoveButtonListener(li, todo.id); // Add event listener to the remove button. li is the parent element, and todo.id is the ID of the todo. 
+    addEditButtonListener(li, todo.id); // Add event listener to the remove button. li is the parent element, and todo.id is the ID of the todo. 
     todoList.appendChild(li); // Append the list item to the ul element
   });
 };
@@ -127,46 +134,30 @@ const addRemoveButtonListener = (li: HTMLLIElement, id: number): void => {
 
 // Step 8: Function to remove a todo by ID
 // Function to remove a todo by ID: This function removes a todo from the array based on its ID.
-const removeTodo = (id: number): void => {
+export const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id);
   renderTodos(); // Re-render the updated list of todos
 }; 
 
 
+// Edit event listener - make button and add button to each todo
+const addEditButtonListener = (li: HTMLLIElement, id:number) => {
+  // make use of the editBtn id to edit the todo
+  const editButton = li.querySelector('#editBtn')
+  editButton?.addEventListener('click', () => editTodo(id)) 
+}
 
-
-// Step 9: Function to toggle the completed status of a todo + 
-// Step 10: Add a button to toggle the completed status of a todo item
-
-// Step 11: Add a button to clear all completed todos
-// Step 12: Function to clear all completed todos
-// Step 13: Add a button to toggle all todos
-
-// Step 14: Edit a todo item and update it
-// Step 15: Add an input field to edit a todo item
-// Step 16: Save the updated todo item
-// Step 17: Cancel the editing of a todo item
-// Step 18: Add a button to cancel the editing of a todo item
-
-// Step 19: Add a button to filter todos by status
-// Step 20: Function to filter todos by status
-
-// Step 21: Add a button to sort todos by status
-// Step 22: Function to sort todos by status
-
-// Step 23: Add a button for color picker for background color (<input type="color" id="colorPicker" />)
-// Step 24: Function to change the background color of the todo list based on the color picker value
-// hints: use the input event to listen for changes in the color picker value, and set the background color of the todo list based on the value of the color picker.
-
-
-
-
-
-
-
-
-
-
+// Edit function - prompt user to edit the todo : editTodo
+const editTodo = (id:number) => {
+  const todo = todos.find(todo => todo.id === id)
+  if (todo) {
+    const text = prompt('Edit todo', todo.text)
+    if (text) {
+      todo.text = text
+      renderTodos()
+    }
+  }
+}
 
 /**
  * color picker
@@ -194,3 +185,83 @@ const initializeColorPicker = (): void => {
 document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker();
 });
+
+/** 
+ * Kristian: 6th of September 2024, BDE
+ * 
+ * This is the list of optional features that can be added to the todo list application:
+ * You must make at least one of these features to complete the project. The more the merrier.
+ * In your submission video, please mention which feature you have implemented and demonstrate how it works. Go through the code and explain how you implemented the feature and how it works.
+ * IF, you want to implement something not on list, you can do that as well.
+*/
+
+
+//Optional features list: 
+
+// Option 1: Add a button to toggle the completed status of a todo item
+// Function to toggle the completed status of a todo + 
+// Add a button to toggle the completed status of a todo item
+
+// Option 2: Add a button to clear all completed todos
+// Add a button to clear all completed todos
+// Function to clear all completed todos
+// Add a button to toggle all todos
+
+// Option 3: Add a button to toggle all todos
+// Edit a todo item and update it
+// Add an input field to edit a todo item
+// Save the updated todo item
+// Cancel the editing of a todo item
+// Add a button to cancel the editing of a todo item
+
+// Option 4: Add a button to filter todos by status
+// Add a button to filter todos by status
+// Function to filter todos by status
+
+// Option 5: Add a button to sort todos by status
+// Add a button to sort todos by status
+// Function to sort todos by status
+
+// Option 6: Due Date for Todos:
+// Add a date input field to set a due date for each todo item.
+// Display the due date next to each todo item.
+// Highlight overdue todos.
+// Priority Levels:
+
+// Option 7: Add a dropdown to set the priority level (e.g., Low, Medium, High) for each todo item.
+// Display the priority level next to each todo item.
+// Sort todos by priority.
+// Search Functionality:
+
+// Option 8: Add a search input field to filter todos based on the search query.
+// Display only the todos that match the search query.
+// Category Tags:
+
+// Option 9: Add a text input field to assign category tags to each todo item.
+// Display the tags next to each todo item.
+// Filter todos by category tags.
+// Progress Indicator:
+
+// Option 10: Add a progress bar to show the percentage of completed todos.
+// Update the progress bar as todos are marked as completed or incomplete.
+// Dark Mode Toggle:
+
+// Option 11: Add a button to toggle between light and dark modes.
+// Change the app's theme based on the selected mode.
+// Export/Import Todos:
+
+// Option 12: Add buttons to export the list of todos to a JSON file.
+// Add functionality to import todos from a JSON file.
+// Notifications:
+
+// Option 13: Add notifications to remind users of due todos.
+// Use the Notification API to show browser notifications.
+
+// Option 14: Local Storage:
+// Save the list of todos to local storage.
+// Retrieve the todos from local storage on page load.
+// Add a button to clear all todos from local storage.
+
+// Option 15: JSDOC Comments:
+// Add JSDoc comments to document the functions and interfaces in the code.
+// Link : https://jsdoc.app/
