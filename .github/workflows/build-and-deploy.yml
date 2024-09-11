@@ -23,5 +23,10 @@ jobs:
       - name: Build the application
         run: npm run build
 
+      - name: TestCafé
+        uses: DevExpress/testcafe-action@latest
+        with:
+            args: "chrome tests"
+
       # - name: Run TestCafe tests
       #   run: npx testcafe chrome tests/
