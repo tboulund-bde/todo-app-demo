@@ -26,7 +26,7 @@ jobs:
       - name: TestCafé
         uses: DevExpress/testcafe-action@latest
         with:
-            args: "chrome tests"
+            args: "chrome test/weeknumber.js"
 
       # - name: Run TestCafe tests
       #   run: npx testcafe chrome tests/
