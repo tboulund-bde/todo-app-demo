@@ -19,11 +19,16 @@ jobs:
       
       - name: Build website
         run: npm run build
-        
+
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: testcafe/testcafe
+    steps:
       - name: TestCafé
         uses: DevExpress/testcafe-action@latest
         with:
-            args: "chrome test/weeknumber.js"
+            args: "chromium test/weeknumber.js"
 
   # build-and-deploy:
   #   runs-on: ubuntu-latest
