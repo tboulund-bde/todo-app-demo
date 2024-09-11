@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node
-      volumes:
-        - ${{ github.workspace }}:/app
+      # volumes:
+      #   - ${{ github.workspace }}:/app
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
