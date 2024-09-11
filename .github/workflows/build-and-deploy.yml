@@ -29,8 +29,8 @@ jobs:
       - name: Build the application
         run: npm run build
 
-      - name: Run the application
-        run: npm run dev
+      # - name: Run the application
+      #   run: npm run dev
 
       - name: TestCafé
         uses: DevExpress/testcafe-action@latest
