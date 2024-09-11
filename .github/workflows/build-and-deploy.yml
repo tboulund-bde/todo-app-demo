@@ -27,7 +27,7 @@ jobs:
       image: testcafe/testcafe
     steps:
       - name: TestCafé
-        run: testcafe chromium test/weeknumber.js
+        run: testcafe chromium:headless test/weeknumber.js
 
   # build-and-deploy:
   #   runs-on: ubuntu-latest
