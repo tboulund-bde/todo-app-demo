@@ -18,7 +18,6 @@ test("Link to Danish version", async t => {
 test("Validate input", async t => {
     await t
         // Arrange
-        .click(Selector(".fc-cta-consent"))
         .typeText(Selector("#q"), "December 1 2024")
         // Act
         .pressKey("enter")
