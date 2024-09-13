@@ -30,7 +30,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: alpine
+      image: node
     steps:
 
       # - name: Checkout code
