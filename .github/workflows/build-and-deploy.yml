@@ -26,26 +26,31 @@ jobs:
           name: build
           path: test
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    container:
-      image: node
-    steps:
-
-      # - name: Checkout code
-      #   uses: actions/checkout@v3
-
-      - name: Load artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: test
-
       - name: TestCafé
         uses: DevExpress/testcafe-action@latest
         with:
           args: "chromium:headless test/weeknumber.js"
+
+  # test:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node
+  #   steps:
+
+      # - name: Checkout code
+      #   uses: actions/checkout@v3
+
+      # - name: Load artifacts
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: build
+      #     path: test
+
+      # - name: TestCafé
+      #   uses: DevExpress/testcafe-action@latest
+      #   with:
+      #     args: "chromium:headless test/weeknumber.js"
 
   # build-and-deploy:
   #   runs-on: ubuntu-latest
