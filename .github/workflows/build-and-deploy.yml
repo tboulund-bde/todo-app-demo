@@ -20,16 +20,22 @@ jobs:
       - name: Build website
         run: npm run build
 
-      - name: Save artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: test
+      # - name: Save artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build
+      #     path: test
+
+      - name: Install TestCafe
+        run: npm install -g testcafe
 
       - name: TestCafé
-        uses: DevExpress/testcafe-action@latest
-        with:
-          args: "chromium:headless test/weeknumber.js"
+        run: testcafe chromium:headless test/weeknumber.js
+
+      # - name: TestCafé
+      #   uses: DevExpress/testcafe-action@latest
+      #   with:
+      #     args: "chromium:headless test/weeknumber.js"
 
   # test:
   #   needs: build
