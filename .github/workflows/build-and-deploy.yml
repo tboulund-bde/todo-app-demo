@@ -30,6 +30,7 @@ jobs:
         run: npm install -g testcafe
 
       - name: Install Chromium
+        run: apt-get update
         run: apt-get install -y chromium-browser
 
       - name: TestCafé
