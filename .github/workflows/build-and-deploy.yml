@@ -30,16 +30,17 @@ jobs:
           server-dir: test/todo/ # trailing slash is important
           local-dir: dist/ # trailing slash is important
 
-      - name: Install TestCafe
-        run: npm install -g testcafe
+      # - name: Install TestCafe
+      #   run: npm install -g testcafe
 
-      - name: Update APT
-        run: apt-get update
+      # - name: Update APT
+      #   run: apt-get update
 
-      - name: Install Chromium
-        run: apt-get install -y chromium
+      # - name: Install Chromium
+      #   run: apt-get install -y chromium
 
       - name: TestCafé
+        uses: boulundeasv/testcafe-action
         run: testcafe chromium:headless test/todo-app.js
 
       - name: Upload artifact
@@ -58,15 +59,6 @@ jobs:
         with:
           name: dist
           path: dist/
-
-      # - name: Checkout code
-      #   uses: actions/checkout@v3
-
-      # - name: Install dependencies
-      #   run: npm install
-      
-      # - name: Build website
-      #   run: npm run build
 
       - name: FTP Deploy to Live
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
