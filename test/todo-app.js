@@ -1,6 +1,6 @@
 import { Selector } from "testcafe";
 
-fixture("Weeknumber.com tests")
+fixture("ToDo app tests")
     .page("https://test.boulund.net/todo/");
 
 test("Adding items", async t => {
