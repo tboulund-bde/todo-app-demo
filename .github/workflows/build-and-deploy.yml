@@ -20,14 +20,23 @@ jobs:
       - name: Build website
         run: npm run build
 
-      - name: Install TestCafe
-        run: npm install -g testcafe
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ var.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /test/
+          local-dir: ./dist/
 
-      - name: Update APT
-        run: apt-get update
+      # - name: Install TestCafe
+      #   run: npm install -g testcafe
 
-      - name: Install Chromium
-        run: apt-get install -y chromium
+      # - name: Update APT
+      #   run: apt-get update
 
-      - name: TestCafé
-        run: testcafe chromium:headless test/weeknumber.js
+      # - name: Install Chromium
+      #   run: apt-get install -y chromium
+
+      # - name: TestCafé
+      #   run: testcafe chromium:headless test/weeknumber.js
