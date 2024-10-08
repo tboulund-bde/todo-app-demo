@@ -1,27 +1,26 @@
 import { Selector } from "testcafe";
 
 fixture("Weeknumber.com tests")
-    .page("https://weeknumber.com");
+    .page("https://test.boulund.net/todo/");
 
-test("Link to Danish version", async t => {
+test("Adding items", async t => {
     await t
-        // Pre-assertion
-        .expect(Selector("#ugenr").innerText).contains("Week")
-        // Arrange
-        .click(Selector("#menu > footer > ul > li:nth-child(1) > a"))
-        // Act
-        .click(Selector("a[hreflang='da']"))
-        // Assertion
-        .expect(Selector("#ugenr").innerText).contains("Uge");
+        // Arrange + Act
+        .typeText(Selector("#todo-input"), "Water flowers")
+        .click(Selector(".todo-form input[type='button']"))
+        .typeText(Selector("#todo-input"), "Buy milk")
+        .click(Selector(".todo-form input[type='button']"))
+        // Assert
+        .expect(Selector("#todo-list").childElementCount).eql(2);
 });
 
-test("Validate input", async t => {
+test("Removing items", async t => {
     await t
         // Arrange
-        .typeText(Selector("#q"), "December 1 2024")
+        .typeText(Selector("#todo-input"), "Water flowers")
+        .click(Selector(".todo-form input[type='button']"))
         // Act
-        .pressKey("enter")
+        .click(Selector(".todo-item:first-of-type button"))
         // Assert
-        .expect(Selector("#ugenr").innerText).eql("week 48")
-        .expect(Selector("#description").innerText).contains("2024");
+        .expect(Selector("#todo-list").childElementCount).eql(0);
 });
