@@ -22,6 +22,7 @@ jobs:
 
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        environment: test
         with:
           server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
