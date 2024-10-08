@@ -4,5 +4,5 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
   },
-  base: "/todo/" // IMPORTANT: Add this line if deployed to a subdirectory
+  base: "./todo/" // IMPORTANT: Add this line if deployed to a subdirectory
 });
