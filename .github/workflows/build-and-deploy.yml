@@ -30,14 +30,14 @@ jobs:
           server-dir: test/todo/ # trailing slash is important
           local-dir: dist/ # trailing slash is important
 
-      # - name: Install TestCafe
-      #   run: npm install -g testcafe
+      - name: Install TestCafe
+        run: npm install -g testcafe
 
-      # - name: Update APT
-      #   run: apt-get update
+      - name: Update APT
+        run: apt-get update
 
-      # - name: Install Chromium
-      #   run: apt-get install -y chromium
+      - name: Install Chromium
+        run: apt-get install -y chromium
 
-      # - name: TestCafé
-      #   run: testcafe chromium:headless test/weeknumber.js
+      - name: TestCafé
+        run: testcafe chromium:headless test/todo-app.js
