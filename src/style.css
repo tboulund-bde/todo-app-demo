@@ -21,7 +21,6 @@
 }
 
 body {
-  background-color: pink;
   font-family: var(--font-family);
   background-color: var(--body-background-color);
   margin: 0;
