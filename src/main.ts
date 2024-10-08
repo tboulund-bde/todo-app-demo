@@ -13,7 +13,7 @@
 
 
 // 1 Import the CSS file: This ensures that the styles are applied to the HTML elements.
-import 'style.css';
+import './style.css';
 
 // Step 2: Define the Todo interface
 // Define the Todo interface: This interface defines the structure of a todo item.
