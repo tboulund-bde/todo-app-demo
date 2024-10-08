@@ -11,7 +11,7 @@ test("Adding items", async t => {
         .typeText(Selector("#todo-input"), "Buy milk")
         .click(Selector(".todo-form button[type='submit']"))
         // Assert
-        .expect(Selector("#todo-list").childElementCount).eql(2);
+        .expect(Selector("#todo-list").childElementCount).eql(3);
 });
 
 test("Removing items", async t => {
