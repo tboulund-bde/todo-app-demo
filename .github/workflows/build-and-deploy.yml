@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Test
     container:
       image: node
     steps:
@@ -21,7 +22,6 @@ jobs:
         run: npm run build
 
       - name: FTP Deploy
-        environment: test
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ vars.FTP_SERVER }}
