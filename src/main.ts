@@ -46,6 +46,7 @@ export const addTodo = (text: string): void => {
     text: text,
     completed: false,
   };
+  console.log(newTodo);
   console.log("Todo added: ", todos); // Log the updated list of todos to the console
   renderTodos(); // Render the updated list of todos => create the function next
 };
