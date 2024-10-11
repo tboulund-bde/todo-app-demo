@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 
 fixture("ToDo app tests")
-    .page("??????????");
+    .page("https://test.boulund.net/todo/");
 
 test("Adding items", async t => {
     await t
