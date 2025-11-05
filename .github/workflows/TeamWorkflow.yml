@@ -18,7 +18,6 @@ jobs:
 
       - name: Test
         run: google-chrome --version
-        run: which google-chrome
 
   #     - name: Install dependencies
   #       run: npm install
