@@ -8,7 +8,7 @@ on:
 
 jobs:
   integration-delivery:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: Test
     container:
       image: node
@@ -41,7 +41,7 @@ jobs:
         run: apt-get install -y chromium
 
       - name: Run tests
-        run: testcafe chromium:headless test/*
+        run: testcafe chromium:headless test/* --browser-init-timeout 60000
 
       - name: Store artifacts
         uses: actions/upload-artifact@v4
