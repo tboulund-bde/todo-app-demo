@@ -19,7 +19,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: latest
+          node-version: lst/*
 
       - name: Install dependencies
         run: npm install
