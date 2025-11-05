@@ -10,8 +10,8 @@ jobs:
   integration-delivery:
     runs-on: ubuntu-latest
     environment: Test
-    container:
-      image: node
+    # container:
+    #   image: node
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
