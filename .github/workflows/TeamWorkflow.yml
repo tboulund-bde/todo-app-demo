@@ -14,15 +14,10 @@ jobs:
       image: node
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - run: |
-          apt-get install -y wget gnupg
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-linux.gpg
-          echo "deb [signed-by=/usr/share/keyrings/google-linux.gpg arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-          apt-get update
-          apt-get install -y google-chrome-stable
-          google-chrome --version
+      - name: Setup node
+        uses: actions/setup-node@v1
 
       - name: Install dependencies
         run: npm install
@@ -30,11 +25,16 @@ jobs:
       - name: Build website
         run: npm run build
 
-      - name: Install TestCafe
-        run: npm install -g testcafe
+      - name: FTP delivery
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ vars.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: test/todo/
+          local-dir: dist/
 
-      - name: List test browsers
-        run: testcafe --list-browsers
-
-      - name: Run tests
-        run: testcafe "chrome:headless --no-sandbox --disable-dev-shm-usage" test/*
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome tests"
