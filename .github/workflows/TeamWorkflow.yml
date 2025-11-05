@@ -16,14 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - uses: browser-actions/setup-chrome@v2
-      #   id: chrome
-      #   with:
-      #     chrome-version: stable
-      #     install-dependencies: true   # <- pulls in libnspr4, libnss3, etc.
-      # # sanity check
-      # - run: ${{ steps.chrome.outputs.chrome-path }} --version
-
       - run: |
           apt-get install -y wget gnupg
           wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-linux.gpg
@@ -38,52 +30,11 @@ jobs:
       - name: Build website
         run: npm run build
 
-  #     - name: FTP delivery
-  #       uses: SamKirkland/FTP-Deploy-Action@4.3.3
-  #       with:
-  #         server: ${{ vars.FTP_SERVER }}
-  #         username: ${{ secrets.FTP_USERNAME }}
-  #         password: ${{ secrets.FTP_PASSWORD }}
-  #         server-dir: test/todo/
-  #         local-dir: dist/
-
       - name: Install TestCafe
         run: npm install -g testcafe
 
       - name: List test browsers
         run: testcafe --list-browsers
 
-      # - name: Update APT
-      #   run: apt-get update
-
-  #     - name: Install Chromium
-  #       run: apt-get install -y chromium
-
       - name: Run tests
-        run: testcafe chrome:headless test/*
-
-  #     - name: Store artifacts
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: dist
-  #         path: dist/
-      
-  # deployment:
-  #   needs: integration-delivery
-  #   runs-on: ubuntu-latest
-  #   environment: Live
-  #   steps:
-  #     - name: Load artifacts
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: dist
-  #         path: dist/
-
-  #     - name: FTP deploy
-  #       uses: SamKirkland/FTP-Deploy-Action@4.3.3
-  #       with:
-  #         server: ${{ vars.FTP_SERVER }}
-  #         username: ${{ secrets.FTP_USERNAME }}
-  #         password: ${{ secrets.FTP_PASSWORD }}
-  #         server-dir: live/todo/
-  #         local-dir: dist/
+        run: testcafe "chrome:headless --no-sandbox --disable-dev-shm-usage" test/*
