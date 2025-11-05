@@ -16,13 +16,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - uses: browser-actions/setup-chrome@v2
-        id: chrome
-        with:
-          chrome-version: stable
-          install-dependencies: true   # <- pulls in libnspr4, libnss3, etc.
-      # sanity check
-      - run: ${{ steps.chrome.outputs.chrome-path }} --version
+      # - uses: browser-actions/setup-chrome@v2
+      #   id: chrome
+      #   with:
+      #     chrome-version: stable
+      #     install-dependencies: true   # <- pulls in libnspr4, libnss3, etc.
+      # # sanity check
+      # - run: ${{ steps.chrome.outputs.chrome-path }} --version
+
+      - run: |
+          apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-linux.gpg
+          echo "deb [signed-by=/usr/share/keyrings/google-linux.gpg arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+          apt-get update
+          apt-get install -y google-chrome-stable
+          google-chrome --version
 
       - name: Install dependencies
         run: npm install
